@@ -1,44 +1,58 @@
 import { createClient } from 'contentful';
 import type { ContentfulClientApi } from 'contentful';
 import { ContentfulConfig, ContentfulConfigError } from './types';
+import { supabase } from '@/integrations/supabase/client';
 
-// Environment configuration
-const CONTENTFUL_SPACE_ID = import.meta.env.VITE_CONTENTFUL_SPACE_ID;
-const CONTENTFUL_ACCESS_TOKEN = import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN;
-const CONTENTFUL_PREVIEW_ACCESS_TOKEN = import.meta.env.VITE_CONTENTFUL_PREVIEW_ACCESS_TOKEN;
-const CONTENTFUL_ENVIRONMENT = import.meta.env.VITE_CONTENTFUL_ENVIRONMENT || 'master';
-
+// Cache for configuration
+let configCache: ContentfulConfig | null = null;
 let client: ContentfulClientApi<undefined> | null = null;
 let previewClient: ContentfulClientApi<undefined> | null = null;
 
-function validateConfig(): ContentfulConfig {
-  if (!CONTENTFUL_SPACE_ID) {
-    throw new ContentfulConfigError('VITE_CONTENTFUL_SPACE_ID environment variable is required');
-  }
-  
-  if (!CONTENTFUL_ACCESS_TOKEN) {
-    throw new ContentfulConfigError('VITE_CONTENTFUL_ACCESS_TOKEN environment variable is required');
+// Fetch Contentful configuration from Supabase edge function
+async function fetchContentfulConfig(): Promise<ContentfulConfig> {
+  if (configCache) {
+    return configCache;
   }
 
-  return {
-    spaceId: CONTENTFUL_SPACE_ID,
-    accessToken: CONTENTFUL_ACCESS_TOKEN,
-    previewAccessToken: CONTENTFUL_PREVIEW_ACCESS_TOKEN,
-    environment: CONTENTFUL_ENVIRONMENT,
-  };
+  try {
+    const { data, error } = await supabase.functions.invoke('get-contentful-config');
+    
+    if (error) {
+      throw new ContentfulConfigError(`Failed to fetch Contentful config: ${error.message}`);
+    }
+
+    if (data.error) {
+      throw new ContentfulConfigError(data.error);
+    }
+
+    if (!data.spaceId || !data.accessToken) {
+      throw new ContentfulConfigError('Invalid Contentful configuration received');
+    }
+
+    configCache = data;
+    return configCache;
+  } catch (error) {
+    console.error('Error fetching Contentful config:', error);
+    throw new ContentfulConfigError('Failed to fetch Contentful configuration from server');
+  }
 }
 
-// Check if we should use Contentful or fall back to mock data
-export function shouldUseContentful(): boolean {
-  return !!(CONTENTFUL_SPACE_ID && CONTENTFUL_ACCESS_TOKEN);
+// Check if we should use Contentful
+export async function shouldUseContentful(): Promise<boolean> {
+  try {
+    await fetchContentfulConfig();
+    return true;
+  } catch {
+    return false;
+  }
 }
 
-export function createContentfulClient(preview = false): ContentfulClientApi<undefined> {
-  const config = validateConfig();
+export async function createContentfulClient(preview = false): Promise<ContentfulClientApi<undefined>> {
+  const config = await fetchContentfulConfig();
 
   if (preview && !config.previewAccessToken) {
     console.warn('Preview token not provided, falling back to published content');
-    return getContentfulClient(false);
+    return await getContentfulClient(false);
   }
 
   const clientConfig = {
@@ -51,16 +65,16 @@ export function createContentfulClient(preview = false): ContentfulClientApi<und
   return createClient(clientConfig);
 }
 
-export function getContentfulClient(preview = false): ContentfulClientApi<undefined> {
+export async function getContentfulClient(preview = false): Promise<ContentfulClientApi<undefined>> {
   if (preview) {
     if (!previewClient) {
-      previewClient = createContentfulClient(true);
+      previewClient = await createContentfulClient(true);
     }
     return previewClient;
   }
 
   if (!client) {
-    client = createContentfulClient(false);
+    client = await createContentfulClient(false);
   }
   return client;
 }
@@ -71,20 +85,29 @@ export function isDevelopment(): boolean {
 }
 
 // Helper to get the appropriate client based on environment
-export function getClient(): ContentfulClientApi<undefined> {
-  // In development, you might want to use preview content
-  const usePreview = isDevelopment() && !!CONTENTFUL_PREVIEW_ACCESS_TOKEN;
-  return getContentfulClient(usePreview);
+export async function getClient(): Promise<ContentfulClientApi<undefined>> {
+  // For now, always use published content since we need to fetch config async
+  return await getContentfulClient(false);
 }
 
 // Test connection
 export async function testConnection(preview = false): Promise<boolean> {
   try {
-    const testClient = getContentfulClient(preview);
+    const testClient = await getContentfulClient(preview);
     await testClient.getSpace();
     return true;
   } catch (error) {
     console.error('Contentful connection test failed:', error);
     return false;
+  }
+}
+
+// Get the current space ID for display purposes
+export async function getSpaceId(): Promise<string | null> {
+  try {
+    const config = await fetchContentfulConfig();
+    return config.spaceId;
+  } catch {
+    return null;
   }
 }

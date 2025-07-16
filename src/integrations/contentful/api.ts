@@ -4,13 +4,13 @@ import type { Entry } from 'contentful';
 
 // Helper functions for data fetching with mock fallback
 export async function getAllPeople(): Promise<Entry<any>[]> {
-  if (!shouldUseContentful()) {
+  if (!(await shouldUseContentful())) {
     console.log('Using mock data for people');
     return mockData.getAllPeople().items as any;
   }
 
   try {
-    const client = getClient();
+    const client = await getClient();
     const response = await client.getEntries({
       content_type: 'person',
       include: 2,
@@ -25,13 +25,13 @@ export async function getAllPeople(): Promise<Entry<any>[]> {
 }
 
 export async function getPersonBySlug(slug: string): Promise<Entry<any> | null> {
-  if (!shouldUseContentful()) {
+  if (!(await shouldUseContentful())) {
     console.log('Using mock data for person:', slug);
     return mockData.getPersonBySlug(slug) as any;
   }
 
   try {
-    const client = getClient();
+    const client = await getClient();
     const response = await client.getEntries({
       content_type: 'person',
       'fields.slug': slug,
@@ -47,13 +47,13 @@ export async function getPersonBySlug(slug: string): Promise<Entry<any> | null> 
 }
 
 export async function getAllCategories(): Promise<Entry<any>[]> {
-  if (!shouldUseContentful()) {
+  if (!(await shouldUseContentful())) {
     console.log('Using mock data for categories');
     return mockData.getAllCategories().items as any;
   }
 
   try {
-    const client = getClient();
+    const client = await getClient();
     const response = await client.getEntries({
       content_type: 'category',
       order: ['fields.name']
@@ -67,13 +67,13 @@ export async function getAllCategories(): Promise<Entry<any>[]> {
 }
 
 export async function getPeopleByCategory(categorySlug: string): Promise<Entry<any>[]> {
-  if (!shouldUseContentful()) {
+  if (!(await shouldUseContentful())) {
     console.log('Using mock data for people by category:', categorySlug);
     return mockData.getPeopleByCategory(categorySlug).items as any;
   }
 
   try {
-    const client = getClient();
+    const client = await getClient();
     
     // First get the category by slug
     const categoryResponse = await client.getEntries({
@@ -104,13 +104,13 @@ export async function getPeopleByCategory(categorySlug: string): Promise<Entry<a
 }
 
 export async function searchPeople(query: string): Promise<Entry<any>[]> {
-  if (!shouldUseContentful()) {
+  if (!(await shouldUseContentful())) {
     console.log('Using mock data for search:', query);
     return mockData.searchPeople(query).items as any;
   }
 
   try {
-    const client = getClient();
+    const client = await getClient();
     const response = await client.getEntries({
       content_type: 'person',
       query: query,
@@ -126,13 +126,13 @@ export async function searchPeople(query: string): Promise<Entry<any>[]> {
 }
 
 export async function getFeaturedPeople(limit: number = 6): Promise<Entry<any>[]> {
-  if (!shouldUseContentful()) {
+  if (!(await shouldUseContentful())) {
     console.log('Using mock data for featured people');
     return mockData.getFeaturedPeople(limit).items as any;
   }
 
   try {
-    const client = getClient();
+    const client = await getClient();
     const response = await client.getEntries({
       content_type: 'person',
       'fields.featured': true,

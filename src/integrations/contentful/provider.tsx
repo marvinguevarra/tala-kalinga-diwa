@@ -29,7 +29,7 @@ export function ContentfulProvider({ children, fallback }: ContentfulProviderPro
     setError(null);
 
     try {
-      const contentfulClient = getClient();
+      const contentfulClient = await getClient();
       const connected = await testConnection();
 
       if (connected) {

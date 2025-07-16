@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { AlertCircle, CheckCircle, Loader2, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { getAllPeople, getAllCategories, getPersonBySlug } from '@/integrations/contentful/api';
+import { getSpaceId } from '@/integrations/contentful/client';
 import type { Entry } from 'contentful';
 
 const ContentfulTest = () => {
@@ -14,6 +15,7 @@ const ContentfulTest = () => {
   const [people, setPeople] = useState<Entry<any>[]>([]);
   const [categories, setCategories] = useState<Entry<any>[]>([]);
   const [testPerson, setTestPerson] = useState<Entry<any> | null>(null);
+  const [spaceId, setSpaceId] = useState<string>('Loading...');
 
   useEffect(() => {
     async function runTests() {
@@ -22,6 +24,12 @@ const ContentfulTest = () => {
         setError(null);
 
         console.log('🧪 Testing Contentful connection...');
+
+        // Test 0: Get space ID
+        console.log('🔍 Fetching space ID...');
+        const currentSpaceId = await getSpaceId();
+        setSpaceId(currentSpaceId || 'Unknown');
+        console.log('✅ Space ID:', currentSpaceId);
 
         // Test 1: Fetch all categories
         console.log('📁 Fetching categories...');
@@ -124,7 +132,7 @@ const ContentfulTest = () => {
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
                     <span className="font-medium">Space ID:</span>
-                    <code className="ml-2 px-2 py-1 bg-muted rounded">9imvaxxd1mhv</code>
+                    <code className="ml-2 px-2 py-1 bg-muted rounded">{spaceId}</code>
                   </div>
                   <div>
                     <span className="font-medium">Environment:</span>

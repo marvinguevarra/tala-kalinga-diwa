@@ -85,31 +85,24 @@ export function ContentfulProvider({ children, fallback }: ContentfulProviderPro
       return <>{fallback}</>;
     }
 
-    // In development mode, continue with null client to allow mock data fallback
-    const isDev = import.meta.env.MODE === 'development';
-    if (isDev) {
-      console.warn('Contentful connection failed, continuing with mock data fallback:', error);
-      // Continue to render children with null client - API functions will handle the fallback
-    } else {
-      return (
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="text-center max-w-md mx-auto p-6">
-            <div className="text-destructive text-xl mb-4">⚠️</div>
-            <h2 className="text-lg font-semibold mb-2">Contentful Connection Error</h2>
-            <p className="text-muted-foreground mb-4">{error}</p>
-            <button
-              onClick={retryConnection}
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
-            >
-              Retry Connection
-            </button>
-            <div className="mt-4 text-sm text-muted-foreground">
-              <p>In development mode, the app will fall back to mock data if Contentful is not configured.</p>
-            </div>
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center max-w-md mx-auto p-6">
+          <div className="text-destructive text-xl mb-4">⚠️</div>
+          <h2 className="text-lg font-semibold mb-2">Contentful Connection Error</h2>
+          <p className="text-muted-foreground mb-4">{error}</p>
+          <button
+            onClick={retryConnection}
+            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+          >
+            Retry Connection
+          </button>
+          <div className="mt-4 text-sm text-muted-foreground">
+            <p>Please check your Contentful configuration in the environment variables.</p>
           </div>
         </div>
-      );
-    }
+      </div>
+    );
   }
 
   return (
@@ -128,12 +121,11 @@ export function useContentful(): ContentfulContextType {
 }
 
 // Hook to get the client directly (with error handling)
-export function useContentfulClient(): ContentfulClientApi<undefined> | null {
-  const { client, isConnected } = useContentful();
+export function useContentfulClient(): ContentfulClientApi<undefined> {
+  const { client, isConnected, error } = useContentful();
   
-  // Return null if not connected - API functions will handle fallback to mock data
   if (!isConnected || !client) {
-    return null;
+    throw new Error(error || 'Contentful client not available');
   }
   
   return client;

@@ -1,0 +1,507 @@
+[
+  {
+    "name": "Albert Einstein",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Albert_Einstein",
+    "category": "Science"
+  },
+  {
+    "name": "Marie Curie",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marie_Curie",
+    "category": "Science"
+  },
+  {
+    "name": "Nikola Tesla",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nikola_Tesla",
+    "category": "Science"
+  },
+  {
+    "name": "Stephen Hawking",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephen_Hawking",
+    "category": "Science"
+  },
+  {
+    "name": "Charles Darwin",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charles_Darwin",
+    "category": "Science"
+  },
+  {
+    "name": "Leonardo da Vinci",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Leonardo_da_Vinci",
+    "category": "Art"
+  },
+  {
+    "name": "Vincent van Gogh",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vincent_van_Gogh",
+    "category": "Art"
+  },
+  {
+    "name": "Pablo Picasso",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pablo_Picasso",
+    "category": "Art"
+  },
+  {
+    "name": "Wolfgang Amadeus Mozart",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wolfgang_Amadeus_Mozart",
+    "category": "Music"
+  },
+  {
+    "name": "Ludwig van Beethoven",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ludwig_van_Beethoven",
+    "category": "Music"
+  },
+  {
+    "name": "William Shakespeare",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William_Shakespeare",
+    "category": "Literature"
+  },
+  {
+    "name": "Jane Austen",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jane_Austen",
+    "category": "Literature"
+  },
+  {
+    "name": "Mark Twain",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Twain",
+    "category": "Literature"
+  },
+  {
+    "name": "Virginia Woolf",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Virginia_Woolf",
+    "category": "Literature"
+  },
+  {
+    "name": "Nelson Mandela",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nelson_Mandela",
+    "category": "Politics"
+  },
+  {
+    "name": "Mahatma Gandhi",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mahatma_Gandhi",
+    "category": "Politics"
+  },
+  {
+    "name": "Abraham Lincoln",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Abraham_Lincoln",
+    "category": "Politics"
+  },
+  {
+    "name": "Winston Churchill",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Winston_Churchill",
+    "category": "Politics"
+  },
+  {
+    "name": "John F. Kennedy",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_F._Kennedy",
+    "category": "Politics"
+  },
+  {
+    "name": "Steve Jobs",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Jobs",
+    "category": "Technology"
+  },
+  {
+    "name": "Bill Gates",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Gates",
+    "category": "Technology"
+  },
+  {
+    "name": "Henry Ford",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Henry_Ford",
+    "category": "Business"
+  },
+  {
+    "name": "Walt Disney",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Walt_Disney",
+    "category": "Entertainment"
+  },
+  {
+    "name": "Oprah Winfrey",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Oprah_Winfrey",
+    "category": "Media"
+  },
+  {
+    "name": "Muhammad Ali",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Muhammad_Ali",
+    "category": "Sports"
+  },
+  {
+    "name": "Michael Jordan",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Jordan",
+    "category": "Sports"
+  },
+  {
+    "name": "Serena Williams",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Serena_Williams",
+    "category": "Sports"
+  },
+  {
+    "name": "Pelé",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pelé",
+    "category": "Sports"
+  },
+  {
+    "name": "Martin Luther King Jr.",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Martin_Luther_King_Jr.",
+    "category": "Civil Rights"
+  },
+  {
+    "name": "Rosa Parks",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rosa_Parks",
+    "category": "Civil Rights"
+  },
+  {
+    "name": "Franklin D. Roosevelt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Franklin_D._Roosevelt",
+    "category": "Politics"
+  },
+  {
+    "name": "Theodore Roosevelt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Theodore_Roosevelt",
+    "category": "Politics"
+  },
+  {
+    "name": "Eleanor Roosevelt",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Eleanor_Roosevelt",
+    "category": "Politics"
+  },
+  {
+    "name": "Cleopatra",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cleopatra",
+    "category": "History"
+  },
+  {
+    "name": "Napoleon Bonaparte",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Napoleon",
+    "category": "History"
+  },
+  {
+    "name": "Alexander the Great",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alexander_the_Great",
+    "category": "History"
+  },
+  {
+    "name": "Julius Caesar",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Julius_Caesar",
+    "category": "History"
+  },
+  {
+    "name": "Isaac Newton",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Isaac_Newton",
+    "category": "Science"
+  },
+  {
+    "name": "Galileo Galilei",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Galileo_Galilei",
+    "category": "Science"
+  },
+  {
+    "name": "Johannes Kepler",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Johannes_Kepler",
+    "category": "Science"
+  },
+  {
+    "name": "Copernicus",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nicolaus_Copernicus",
+    "category": "Science"
+  },
+  {
+    "name": "Benjamin Franklin",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benjamin_Franklin",
+    "category": "Politics"
+  },
+  {
+    "name": "Thomas Jefferson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas_Jefferson",
+    "category": "Politics"
+  },
+  {
+    "name": "George Washington",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/George_Washington",
+    "category": "Politics"
+  },
+  {
+    "name": "Frida Kahlo",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Frida_Kahlo",
+    "category": "Art"
+  },
+  {
+    "name": "Claude Monet",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Claude_Monet",
+    "category": "Art"
+  },
+  {
+    "name": "Salvador Dalí",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Salvador_Dalí",
+    "category": "Art"
+  },
+  {
+    "name": "Michelangelo",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michelangelo",
+    "category": "Art"
+  },
+  {
+    "name": "Beethoven",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ludwig_van_Beethoven",
+    "category": "Music"
+  },
+  {
+    "name": "Bob Dylan",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bob_Dylan",
+    "category": "Music"
+  },
+  {
+    "name": "The Beatles",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Beatles",
+    "category": "Music"
+  },
+  {
+    "name": "Elvis Presley",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elvis_Presley",
+    "category": "Music"
+  },
+  {
+    "name": "Michael Jackson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Jackson",
+    "category": "Music"
+  },
+  {
+    "name": "Madonna",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Madonna",
+    "category": "Music"
+  },
+  {
+    "name": "Prince",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Prince_(musician)",
+    "category": "Music"
+  },
+  {
+    "name": "Aretha Franklin",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aretha_Franklin",
+    "category": "Music"
+  },
+  {
+    "name": "Frank Sinatra",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Frank_Sinatra",
+    "category": "Music"
+  },
+  {
+    "name": "Charlie Chaplin",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charlie_Chaplin",
+    "category": "Entertainment"
+  },
+  {
+    "name": "Marilyn Monroe",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marilyn_Monroe",
+    "category": "Entertainment"
+  },
+  {
+    "name": "Audrey Hepburn",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Audrey_Hepburn",
+    "category": "Entertainment"
+  },
+  {
+    "name": "Elizabeth Taylor",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elizabeth_Taylor",
+    "category": "Entertainment"
+  },
+  {
+    "name": "James Dean",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_Dean",
+    "category": "Entertainment"
+  },
+  {
+    "name": "Humphrey Bogart",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Humphrey_Bogart",
+    "category": "Entertainment"
+  },
+  {
+    "name": "Alfred Hitchcock",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alfred_Hitchcock",
+    "category": "Entertainment"
+  },
+  {
+    "name": "Steven Spielberg",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steven_Spielberg",
+    "category": "Entertainment"
+  },
+  {
+    "name": "Stanley Kubrick",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stanley_Kubrick",
+    "category": "Entertainment"
+  },
+  {
+    "name": "Orson Welles",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Orson_Welles",
+    "category": "Entertainment"
+  },
+  {
+    "name": "Socrates",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Socrates",
+    "category": "Philosophy"
+  },
+  {
+    "name": "Plato",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Plato",
+    "category": "Philosophy"
+  },
+  {
+    "name": "Aristotle",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aristotle",
+    "category": "Philosophy"
+  },
+  {
+    "name": "Confucius",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Confucius",
+    "category": "Philosophy"
+  },
+  {
+    "name": "Buddha",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gautama_Buddha",
+    "category": "Philosophy"
+  },
+  {
+    "name": "Lao Tzu",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Laozi",
+    "category": "Philosophy"
+  },
+  {
+    "name": "Sun Tzu",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sun_Tzu",
+    "category": "Philosophy"
+  },
+  {
+    "name": "René Descartes",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/René_Descartes",
+    "category": "Philosophy"
+  },
+  {
+    "name": "Immanuel Kant",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Immanuel_Kant",
+    "category": "Philosophy"
+  },
+  {
+    "name": "Friedrich Nietzsche",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Friedrich_Nietzsche",
+    "category": "Philosophy"
+  },
+  {
+    "name": "Karl Marx",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karl_Marx",
+    "category": "Philosophy"
+  },
+  {
+    "name": "John Locke",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Locke",
+    "category": "Philosophy"
+  },
+  {
+    "name": "David Hume",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Hume",
+    "category": "Philosophy"
+  },
+  {
+    "name": "John Stuart Mill",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Stuart_Mill",
+    "category": "Philosophy"
+  },
+  {
+    "name": "Jean-Jacques Rousseau",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jean-Jacques_Rousseau",
+    "category": "Philosophy"
+  },
+  {
+    "name": "Voltaire",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Voltaire",
+    "category": "Philosophy"
+  },
+  {
+    "name": "John F. Kennedy",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_F._Kennedy",
+    "category": "Politics"
+  },
+  {
+    "name": "Ronald Reagan",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ronald_Reagan",
+    "category": "Politics"
+  },
+  {
+    "name": "Margaret Thatcher",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Margaret_Thatcher",
+    "category": "Politics"
+  },
+  {
+    "name": "Queen Elizabeth II",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elizabeth_II",
+    "category": "Royalty"
+  },
+  {
+    "name": "Princess Diana",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Diana,_Princess_of_Wales",
+    "category": "Royalty"
+  },
+  {
+    "name": "Mother Teresa",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mother_Teresa",
+    "category": "Humanitarian"
+  },
+  {
+    "name": "Anne Frank",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anne_Frank",
+    "category": "History"
+  },
+  {
+    "name": "Helen Keller",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Helen_Keller",
+    "category": "Inspiration"
+  },
+  {
+    "name": "Babe Ruth",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Babe_Ruth",
+    "category": "Sports"
+  },
+  {
+    "name": "Lou Gehrig",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lou_Gehrig",
+    "category": "Sports"
+  },
+  {
+    "name": "Jackie Robinson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jackie_Robinson",
+    "category": "Sports"
+  },
+  {
+    "name": "Joe DiMaggio",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joe_DiMaggio",
+    "category": "Sports"
+  },
+  {
+    "name": "Tiger Woods",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tiger_Woods",
+    "category": "Sports"
+  },
+  {
+    "name": "LeBron James",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/LeBron_James",
+    "category": "Sports"
+  },
+  {
+    "name": "Kobe Bryant",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kobe_Bryant",
+    "category": "Sports"
+  },
+  {
+    "name": "Shaquille O'Neal",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shaquille_O%27Neal",
+    "category": "Sports"
+  },
+  {
+    "name": "Magic Johnson",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Magic_Johnson",
+    "category": "Sports"
+  },
+  {
+    "name": "Larry Bird",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Larry_Bird",
+    "category": "Sports"
+  }
+]

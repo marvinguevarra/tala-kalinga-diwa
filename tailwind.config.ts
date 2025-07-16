@@ -61,7 +61,23 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				/* Filipino cultural colors */
+				filipino: {
+					gold: 'hsl(var(--filipino-gold))',
+					red: 'hsl(var(--filipino-red))',
+					blue: 'hsl(var(--filipino-blue))',
+					'blue-light': 'hsl(var(--filipino-blue-light))'
 				}
+			},
+			backgroundImage: {
+				'gradient-hero': 'var(--gradient-hero)',
+				'gradient-accent': 'var(--gradient-accent)',
+				'gradient-subtle': 'var(--gradient-subtle)'
+			},
+			boxShadow: {
+				'filipino': 'var(--shadow-filipino)',
+				'gold': 'var(--shadow-gold)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

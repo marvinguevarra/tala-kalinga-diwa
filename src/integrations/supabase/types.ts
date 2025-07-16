@@ -14,7 +14,258 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      drink_logs: {
+        Row: {
+          created_at: string
+          drink_id: string
+          guest_id: string
+          id: string
+          timestamp: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          drink_id: string
+          guest_id: string
+          id?: string
+          timestamp?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          drink_id?: string
+          guest_id?: string
+          id?: string
+          timestamp?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "drink_logs_drink_id_fkey"
+            columns: ["drink_id"]
+            isOneToOne: false
+            referencedRelation: "drinks"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "drink_logs_guest_id_fkey"
+            columns: ["guest_id"]
+            isOneToOne: false
+            referencedRelation: "wedding_guests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      drinks: {
+        Row: {
+          category: string
+          created_at: string
+          emoji: string
+          id: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          emoji: string
+          id?: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          emoji?: string
+          id?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      goals: {
+        Row: {
+          created_at: string
+          current_progress: number | null
+          description: string | null
+          end_date: string | null
+          id: string
+          start_date: string
+          status: string
+          target_type: string
+          target_value: number | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          current_progress?: number | null
+          description?: string | null
+          end_date?: string | null
+          id?: string
+          start_date?: string
+          status?: string
+          target_type: string
+          target_value?: number | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          current_progress?: number | null
+          description?: string | null
+          end_date?: string | null
+          id?: string
+          start_date?: string
+          status?: string
+          target_type?: string
+          target_value?: number | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      journal_entries: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          mood_after: number | null
+          mood_before: number | null
+          tags: string[] | null
+          title: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          mood_after?: number | null
+          mood_before?: number | null
+          tags?: string[] | null
+          title?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          mood_after?: number | null
+          mood_before?: number | null
+          tags?: string[] | null
+          title?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      mood_entries: {
+        Row: {
+          created_at: string
+          date: string
+          energy_level: number
+          id: string
+          mood_score: number
+          notes: string | null
+          sleep_hours: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          energy_level: number
+          id?: string
+          mood_score: number
+          notes?: string | null
+          sleep_hours?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          energy_level?: number
+          id?: string
+          mood_score?: number
+          notes?: string | null
+          sleep_hours?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          timezone: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          timezone?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          timezone?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      wedding_guests: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          drink_count: number
+          id: string
+          last_drink_timestamp: string | null
+          name: string
+          qr_code_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          drink_count?: number
+          id?: string
+          last_drink_timestamp?: string | null
+          name: string
+          qr_code_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          drink_count?: number
+          id?: string
+          last_drink_timestamp?: string | null
+          name?: string
+          qr_code_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

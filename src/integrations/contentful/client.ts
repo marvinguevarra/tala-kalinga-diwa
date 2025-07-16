@@ -15,24 +15,40 @@ async function fetchContentfulConfig(): Promise<ContentfulConfig> {
   }
 
   try {
+    console.log('Invoking get-contentful-config edge function...');
     const { data, error } = await supabase.functions.invoke('get-contentful-config');
     
+    console.log('Edge function response:', { data, error });
+    
     if (error) {
+      console.error('Edge function error:', error);
       throw new ContentfulConfigError(`Failed to fetch Contentful config: ${error.message}`);
     }
 
-    if (data.error) {
+    if (data?.error) {
+      console.error('Contentful config error:', data.error);
       throw new ContentfulConfigError(data.error);
     }
 
-    if (!data.spaceId || !data.accessToken) {
+    if (!data?.spaceId || !data?.accessToken) {
+      console.error('Invalid config received:', data);
       throw new ContentfulConfigError('Invalid Contentful configuration received');
     }
 
+    console.log('Successfully fetched Contentful config:', {
+      spaceId: data.spaceId.substring(0, 8) + '...',
+      hasAccessToken: !!data.accessToken,
+      hasPreviewToken: !!data.previewAccessToken,
+      environment: data.environment
+    });
+    
     configCache = data;
     return configCache;
   } catch (error) {
     console.error('Error fetching Contentful config:', error);
+    if (error instanceof ContentfulConfigError) {
+      throw error;
+    }
     throw new ContentfulConfigError('Failed to fetch Contentful configuration from server');
   }
 }

@@ -28,7 +28,9 @@ Deno.serve(async (req) => {
       hasSpaceId: !!spaceId,
       hasAccessToken: !!accessToken,
       hasPreviewAccessToken: !!previewAccessToken,
-      environment
+      environment,
+      spaceIdValue: spaceId ? spaceId.substring(0, 8) + '...' : 'missing',
+      tokenLength: accessToken ? accessToken.length : 0
     })
 
     if (!spaceId || !accessToken) {

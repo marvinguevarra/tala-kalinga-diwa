@@ -8,9 +8,10 @@ export function Header() {
   const { theme, setTheme } = useTheme();
 
   const navigation = [
-    { name: "Home", href: "#" },
+    { name: "Home", href: "/" },
     { name: "All Profiles", href: "#" },
     { name: "Categories", href: "#" },
+    { name: "Profile Demo", href: "/profile-demo" },
     { name: "Timeline", href: "#" },
     { name: "About", href: "#" }
   ];

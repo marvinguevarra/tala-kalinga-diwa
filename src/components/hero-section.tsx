@@ -84,79 +84,81 @@ export function HeroSection() {
           </div>
 
           {/* Right Side - Featured Person Card */}
-          <div className="relative">
-            <Card className="bg-white/95 backdrop-blur-sm border-none shadow-filipino p-8 w-full max-w-md mx-auto lg:mx-0 min-h-[400px]">
-              <div className="flex items-center gap-2 mb-4">
-                <Star className="h-5 w-5 text-accent fill-current" />
-                <span className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-                  Featured Profile
-                </span>
+          <div className="flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-md">
+              <Card className="bg-white/95 backdrop-blur-sm border-none shadow-filipino p-8 w-full min-h-[400px]">
+                <div className="flex items-center gap-2 mb-4">
+                  <Star className="h-5 w-5 text-accent fill-current" />
+                  <span className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                    Featured Profile
+                  </span>
+                </div>
+                
+                <h3 className="text-2xl font-bold text-foreground mb-2">
+                  {currentPerson.name}
+                </h3>
+                
+                <p className="text-primary font-semibold mb-3">
+                  {currentPerson.title}
+                </p>
+                
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  {currentPerson.description}
+                </p>
+                
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-sm">
+                    <span className="font-medium">Category:</span>
+                    <span className="text-muted-foreground">{currentPerson.category}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <span className="font-medium">Key Achievement:</span>
+                    <span className="text-muted-foreground">{currentPerson.achievements}</span>
+                  </div>
+                </div>
+
+                <Button className="w-full mt-6 bg-primary text-primary-foreground">
+                  View Full Profile
+                </Button>
+              </Card>
+
+              {/* Navigation Controls - Positioned relative to the card container */}
+              <div className="absolute -left-6 top-1/2 transform -translate-y-1/2 z-10">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={prevSlide}
+                  className="bg-white/90 border-none shadow-lg hover:bg-white"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </Button>
               </div>
               
-              <h3 className="text-2xl font-bold text-foreground mb-2">
-                {currentPerson.name}
-              </h3>
-              
-              <p className="text-primary font-semibold mb-3">
-                {currentPerson.title}
-              </p>
-              
-              <p className="text-muted-foreground mb-4 leading-relaxed">
-                {currentPerson.description}
-              </p>
-              
-              <div className="space-y-2">
-                <div className="flex items-center gap-2 text-sm">
-                  <span className="font-medium">Category:</span>
-                  <span className="text-muted-foreground">{currentPerson.category}</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <span className="font-medium">Key Achievement:</span>
-                  <span className="text-muted-foreground">{currentPerson.achievements}</span>
-                </div>
+              <div className="absolute -right-6 top-1/2 transform -translate-y-1/2 z-10">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={nextSlide}
+                  className="bg-white/90 border-none shadow-lg hover:bg-white"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </Button>
               </div>
 
-              <Button className="w-full mt-6 bg-primary text-primary-foreground">
-                View Full Profile
-              </Button>
-            </Card>
-
-            {/* Navigation Controls */}
-            <div className="absolute -left-4 top-1/2 transform -translate-y-1/2">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={prevSlide}
-                className="bg-white/90 border-none shadow-lg hover:bg-white"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </Button>
-            </div>
-            
-            <div className="absolute -right-4 top-1/2 transform -translate-y-1/2">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={nextSlide}
-                className="bg-white/90 border-none shadow-lg hover:bg-white"
-              >
-                <ChevronRight className="h-5 w-5" />
-              </Button>
-            </div>
-
-            {/* Slide Indicators */}
-            <div className="flex justify-center gap-2 mt-6">
-              {featuredPersonalities.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    index === currentIndex 
-                      ? 'bg-accent shadow-gold' 
-                      : 'bg-white/50 hover:bg-white/75'
-                  }`}
-                />
-              ))}
+              {/* Slide Indicators */}
+              <div className="flex justify-center gap-2 mt-6">
+                {featuredPersonalities.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentIndex(index)}
+                    className={`w-3 h-3 rounded-full transition-all ${
+                      index === currentIndex 
+                        ? 'bg-accent shadow-gold' 
+                        : 'bg-white/50 hover:bg-white/75'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>

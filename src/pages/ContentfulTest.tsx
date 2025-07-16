@@ -233,7 +233,7 @@ const ContentfulTest = () => {
                 <div className="space-y-2 text-sm">
                   <p>✅ Your Contentful integration is working!</p>
                   {categories.length === 0 && (
-                    <p>🚀 Run <code>node setup-contentful.js</code> to create your categories</p>
+                    <p>🚀 Run <code>node setup-contentful.cjs</code> to create your categories</p>
                   )}
                   {people.length === 0 && (
                     <p>👥 Add some Person entries in your Contentful web interface</p>

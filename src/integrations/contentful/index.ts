@@ -5,6 +5,7 @@ export * from './provider';
 export * from './hooks';
 export * from './utils';
 export * from './rich-text';
+export * from './api';
 
 // Re-export commonly used types from Contentful
 export type { Asset, Entry } from 'contentful';

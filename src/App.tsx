@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes";
 import { ContentfulProvider } from "./integrations/contentful";
 import Index from "./pages/Index";
 import ProfileDemo from "./pages/ProfileDemo";
+import ContentfulTest from "./pages/ContentfulTest";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/profile-demo" element={<ProfileDemo />} />
+              <Route path="/contentful-test" element={<ContentfulTest />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

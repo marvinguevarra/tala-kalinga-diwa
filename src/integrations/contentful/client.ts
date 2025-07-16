@@ -2,10 +2,10 @@ import { createClient } from 'contentful';
 import type { ContentfulClientApi } from 'contentful';
 import { ContentfulConfig, ContentfulConfigError } from './types';
 
-// Environment variables (these would be set in your build process)
-const CONTENTFUL_SPACE_ID = 'your-contentful-space-id';
-const CONTENTFUL_ACCESS_TOKEN = 'your-contentful-access-token';
-const CONTENTFUL_PREVIEW_ACCESS_TOKEN = 'your-contentful-preview-token';
+// Environment configuration - Using your actual Contentful credentials
+const CONTENTFUL_SPACE_ID = '9imvaxxd1mhv';
+const CONTENTFUL_ACCESS_TOKEN = 'CFPAT-XVjsoBzaT_6uBd3QHd_jMIsla7EMNCfnPyVPvCfDuEk';
+const CONTENTFUL_PREVIEW_ACCESS_TOKEN = 'CFPAT-XVjsoBzaT_6uBd3QHd_jMIsla7EMNCfnPyVPvCfDuEk';
 const CONTENTFUL_ENVIRONMENT = 'master';
 
 let client: ContentfulClientApi<undefined> | null = null;

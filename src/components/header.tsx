@@ -12,6 +12,7 @@ export function Header() {
     { name: "All Profiles", href: "#" },
     { name: "Categories", href: "#" },
     { name: "Profile Demo", href: "/profile-demo" },
+    { name: "Contentful Test", href: "/contentful-test" },
     { name: "Timeline", href: "#" },
     { name: "About", href: "#" }
   ];

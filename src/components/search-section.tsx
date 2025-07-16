@@ -1,5 +1,5 @@
-import { SearchBar } from "@/components/ui/search-bar";
-import { Badge } from "@/components/ui/badge";
+import { SearchFilter } from "@/components/ui/search-filter";
+import { useState } from "react";
 
 const popularSearches = [
   "José Rizal",
@@ -14,9 +14,20 @@ const popularSearches = [
 ];
 
 export function SearchSection() {
-  const handleSearch = (query: string) => {
-    console.log("Searching for:", query);
-    // TODO: Implement search functionality
+  const [resultsCount, setResultsCount] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const handleSearch = (filters: { query: string; category: string; sortBy: string }) => {
+    console.log("Searching with filters:", filters);
+    setLoading(true);
+    
+    // TODO: Replace with actual Supabase search
+    setTimeout(() => {
+      // Mock results count based on query
+      const mockCount = filters.query ? Math.floor(Math.random() * 50) + 1 : 100;
+      setResultsCount(mockCount);
+      setLoading(false);
+    }, 800);
   };
 
   return (
@@ -31,25 +42,11 @@ export function SearchSection() {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          <SearchBar onSearch={handleSearch} />
-          
-          <div className="mt-8 text-center">
-            <p className="text-sm text-muted-foreground mb-4">Popular searches:</p>
-            <div className="flex flex-wrap justify-center gap-2">
-              {popularSearches.map((search) => (
-                <Badge
-                  key={search}
-                  variant="secondary"
-                  className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
-                  onClick={() => handleSearch(search)}
-                >
-                  {search}
-                </Badge>
-              ))}
-            </div>
-          </div>
-        </div>
+        <SearchFilter 
+          onSearch={handleSearch}
+          resultsCount={resultsCount}
+          loading={loading}
+        />
       </div>
     </section>
   );

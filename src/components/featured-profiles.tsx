@@ -1,79 +1,73 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, MapPin, Award, Calendar } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { ProfileCard } from "@/components/ui/profile-card";
 
 const profiles = [
   {
-    id: 1,
+    id: "1",
     name: "Dr. Fe del Mundo",
-    title: "Pioneering Pediatrician",
-    category: "Science & Medicine",
-    location: "Philippines",
-    era: "1911-2011",
-    image: "/api/placeholder/300/400",
+    slug: "fe-del-mundo",
+    image_url: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=500&fit=crop&crop=face",
+    category: "Science & Medicine" as const,
+    tagline: "Pioneering pediatrician who revolutionized child healthcare in the Philippines",
     achievements: [
       "First woman admitted to Harvard Medical School",
-      "Founded first pediatric hospital in Philippines"
-    ],
-    description: "Groundbreaking pediatrician who revolutionized child healthcare in the Philippines."
+      "Founded first pediatric hospital in Philippines",
+      "Pioneered modern pediatric care in Asia"
+    ]
   },
   {
-    id: 2,
+    id: "2", 
     name: "Carlos P. Romulo",
-    title: "Diplomat & Journalist",
-    category: "Politics & Law",
-    location: "International",
-    era: "1898-1985",
-    image: "/api/placeholder/300/400",
+    slug: "carlos-romulo",
+    image_url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=500&fit=crop&crop=face",
+    category: "Politics & Law" as const,
+    tagline: "Distinguished diplomat and journalist who represented Philippine interests globally",
     achievements: [
       "First Asian UN General Assembly President",
-      "Pulitzer Prize winner"
-    ],
-    description: "Distinguished diplomat and journalist who represented Philippine interests globally."
+      "Pulitzer Prize winner",
+      "Signed UN Charter for Philippines"
+    ]
   },
   {
-    id: 3,
+    id: "3",
     name: "Bruno Mars",
-    title: "Global Music Superstar",
-    category: "Arts & Entertainment",
-    location: "USA (Filipino-Hawaiian)",
-    era: "1985-Present",
-    image: "/api/placeholder/300/400",
+    slug: "bruno-mars", 
+    image_url: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=500&fit=crop&crop=face",
+    category: "Arts & Entertainment" as const,
+    tagline: "Chart-topping artist of Filipino-Hawaiian descent who conquered global music scene",
     achievements: [
       "15 Grammy Awards",
-      "Over 130 million records sold worldwide"
-    ],
-    description: "Chart-topping artist of Filipino-Hawaiian descent who conquered global music scene."
+      "Over 130 million records sold worldwide",
+      "Multiple Billboard #1 hits"
+    ]
   },
   {
-    id: 4,
-    name: "Gina López",
-    title: "Environmental Advocate",
-    category: "Social Advocacy",
-    location: "Philippines",
-    era: "1953-2019",
-    image: "/api/placeholder/300/400",
+    id: "4",
+    name: "Gina López", 
+    slug: "gina-lopez",
+    image_url: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=500&fit=crop&crop=face",
+    category: "Social Advocacy" as const,
+    tagline: "Passionate environmental activist and former government official",
     achievements: [
       "Former Environment Secretary",
-      "Founded multiple environmental NGOs"
-    ],
-    description: "Passionate environmental activist and former government official."
+      "Founded multiple environmental NGOs",
+      "Championed indigenous rights"
+    ]
   },
   {
-    id: 5,
+    id: "5",
     name: "Tony Tan Caktiong",
-    title: "Business Magnate",
-    category: "Business & Innovation",
-    location: "Philippines",
-    era: "1953-Present",
-    image: "/api/placeholder/300/400",
+    slug: "tony-tan-caktiong",
+    image_url: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=500&fit=crop&crop=face",
+    category: "Business & Innovation" as const,
+    tagline: "Entrepreneur who built one of Asia's largest fast-food chains",
     achievements: [
-      "Founder of Jollibee Foods Corporation",
-      "Built global Filipino food empire"
-    ],
-    description: "Entrepreneur who built one of Asia's largest fast-food chains."
+      "Founder of Jollibee Foods Corporation", 
+      "Built global Filipino food empire",
+      "Forbes billionaire list"
+    ]
   }
 ];
 
@@ -88,6 +82,11 @@ export function FeaturedProfiles() {
 
   const prevProfiles = () => {
     setCurrentIndex((prev) => (prev - 1 + totalPages) % totalPages);
+  };
+
+  const handleViewProfile = (slug: string) => {
+    console.log("Viewing profile:", slug);
+    // TODO: Navigate to profile page
   };
 
   const currentProfiles = profiles.slice(
@@ -128,58 +127,13 @@ export function FeaturedProfiles() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 justify-items-center">
           {currentProfiles.map((profile) => (
-            <Card key={profile.id} className="group cursor-pointer hover:shadow-filipino transition-all duration-300 overflow-hidden">
-              <div className="aspect-[3/4] bg-gradient-subtle relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <Badge className="mb-2 bg-accent text-accent-foreground">
-                    {profile.category}
-                  </Badge>
-                  <h3 className="font-bold text-xl mb-1">{profile.name}</h3>
-                  <p className="text-sm opacity-90">{profile.title}</p>
-                </div>
-              </div>
-              
-              <CardContent className="p-6">
-                <div className="space-y-4">
-                  <p className="text-muted-foreground leading-relaxed">
-                    {profile.description}
-                  </p>
-
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="h-4 w-4 text-primary" />
-                      <span className="text-muted-foreground">{profile.location}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4 text-primary" />
-                      <span className="text-muted-foreground">{profile.era}</span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-                      <Award className="h-4 w-4 text-accent" />
-                      <span>Key Achievements:</span>
-                    </div>
-                    <ul className="text-sm text-muted-foreground space-y-1">
-                      {profile.achievements.map((achievement, index) => (
-                        <li key={index} className="flex items-start gap-2">
-                          <span className="text-accent mt-1">•</span>
-                          <span>{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <Button className="w-full mt-4 group-hover:bg-primary group-hover:text-primary-foreground transition-all">
-                    Read Full Story
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            <ProfileCard
+              key={profile.id}
+              person={profile}
+              onViewProfile={handleViewProfile}
+            />
           ))}
         </div>
 

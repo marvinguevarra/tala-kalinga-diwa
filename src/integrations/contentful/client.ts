@@ -24,6 +24,18 @@ function validateConfig(): ContentfulConfig {
 // Check if we should use Contentful or fall back to mock data
 export function shouldUseContentful(): boolean {
   // Use Contentful if we have a space ID and access token
+  // In development mode, also check if the connection actually works
+  if (import.meta.env.MODE === 'development') {
+    // If we don't have proper environment variables, fall back to mock data
+    const hasCredentials = !!(CONTENTFUL_SPACE_ID && CONTENTFUL_ACCESS_TOKEN);
+    if (!hasCredentials) {
+      return false;
+    }
+    // If we have fallback credentials but they're invalid, use mock data
+    if (CONTENTFUL_SPACE_ID === '9imvaxxd1mhv' && CONTENTFUL_ACCESS_TOKEN === 'CFPAT-XVjsoBzaT_6uBd3QHd_jMIsla7EMNCfnPyVPvCfDuEk') {
+      return false;
+    }
+  }
   return !!(CONTENTFUL_SPACE_ID && CONTENTFUL_ACCESS_TOKEN);
 }
 

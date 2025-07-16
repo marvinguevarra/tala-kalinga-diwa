@@ -85,7 +85,7 @@ export function HeroSection() {
 
           {/* Right Side - Featured Person Card */}
           <div className="relative">
-            <Card className="bg-white/95 backdrop-blur-sm border-none shadow-filipino p-8">
+            <Card className="bg-white/95 backdrop-blur-sm border-none shadow-filipino p-8 w-full max-w-md mx-auto lg:mx-0 min-h-[400px]">
               <div className="flex items-center gap-2 mb-4">
                 <Star className="h-5 w-5 text-accent fill-current" />
                 <span className="text-sm font-medium text-muted-foreground uppercase tracking-wide">

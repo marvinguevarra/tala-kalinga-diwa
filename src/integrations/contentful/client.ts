@@ -2,11 +2,11 @@ import { createClient } from 'contentful';
 import type { ContentfulClientApi } from 'contentful';
 import { ContentfulConfig, ContentfulConfigError } from './types';
 
-// Environment configuration - Using your actual Contentful credentials
-const CONTENTFUL_SPACE_ID = '9imvaxxd1mhv';
-const CONTENTFUL_ACCESS_TOKEN = 'CFPAT-XVjsoBzaT_6uBd3QHd_jMIsla7EMNCfnPyVPvCfDuEk';
-const CONTENTFUL_PREVIEW_ACCESS_TOKEN = 'CFPAT-XVjsoBzaT_6uBd3QHd_jMIsla7EMNCfnPyVPvCfDuEk';
-const CONTENTFUL_ENVIRONMENT = 'master';
+// Environment configuration - Using Vite environment variables
+const CONTENTFUL_SPACE_ID = import.meta.env.VITE_CONTENTFUL_SPACE_ID;
+const CONTENTFUL_ACCESS_TOKEN = import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN;
+const CONTENTFUL_PREVIEW_ACCESS_TOKEN = import.meta.env.VITE_CONTENTFUL_PREVIEW_ACCESS_TOKEN;
+const CONTENTFUL_ENVIRONMENT = import.meta.env.VITE_CONTENTFUL_ENVIRONMENT || 'master';
 
 let client: ContentfulClientApi<undefined> | null = null;
 let previewClient: ContentfulClientApi<undefined> | null = null;
@@ -14,13 +14,13 @@ let previewClient: ContentfulClientApi<undefined> | null = null;
 function validateConfig(): ContentfulConfig {
   if (!CONTENTFUL_SPACE_ID) {
     throw new ContentfulConfigError(
-      'Contentful Space ID is required. Please set CONTENTFUL_SPACE_ID environment variable.'
+      'Contentful Space ID is required. Please set VITE_CONTENTFUL_SPACE_ID environment variable.'
     );
   }
 
   if (!CONTENTFUL_ACCESS_TOKEN) {
     throw new ContentfulConfigError(
-      'Contentful Access Token is required. Please set CONTENTFUL_ACCESS_TOKEN environment variable.'
+      'Contentful Access Token is required. Please set VITE_CONTENTFUL_ACCESS_TOKEN environment variable.'
     );
   }
 

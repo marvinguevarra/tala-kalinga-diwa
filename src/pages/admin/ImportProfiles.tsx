@@ -41,8 +41,19 @@ export default function ImportProfiles() {
 
     if (names.length === 0) {
       toast({
-        title: "Error",
+        title: "Validation Error",
         description: "Please enter at least one Wikipedia page name",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Validate that names are not just empty spaces or invalid characters
+    const invalidNames = names.filter(name => name.length < 2 || !/^[a-zA-Z0-9_\s-]+$/.test(name));
+    if (invalidNames.length > 0) {
+      toast({
+        title: "Invalid Page Names",
+        description: `Invalid Wikipedia page names detected: ${invalidNames.join(', ')}. Use only letters, numbers, underscores, and hyphens.`,
         variant: "destructive",
       });
       return;
@@ -92,14 +103,23 @@ export default function ImportProfiles() {
       const successCount = results.filter(p => p.profile).length;
       const errorCount = results.filter(p => p.error).length;
 
-      toast({
-        title: "Wikipedia Fetch Complete",
-        description: `Successfully fetched ${successCount} profiles. ${errorCount} errors.`,
-      });
+      if (successCount > 0) {
+        toast({
+          title: "Wikipedia Fetch Complete",
+          description: `Successfully fetched ${successCount} profile${successCount > 1 ? 's' : ''}${errorCount > 0 ? `. ${errorCount} failed.` : '.'}`,
+        });
+      } else {
+        toast({
+          title: "Fetch Failed",
+          description: `Failed to fetch any profiles. Please check the page names and try again.`,
+          variant: "destructive",
+        });
+      }
     } catch (error) {
+      console.error('Fetch error:', error);
       toast({
-        title: "Fetch Failed",
-        description: error instanceof Error ? error.message : "Unknown error occurred",
+        title: "Network Error",
+        description: error instanceof Error ? error.message : "Failed to connect to Wikipedia. Please check your internet connection and try again.",
         variant: "destructive",
       });
     } finally {
@@ -273,19 +293,28 @@ export default function ImportProfiles() {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
+              <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-1">
                 {profiles.map((importProfile, index) => (
-                  <Card key={index} className="border-l-4 border-l-primary/20">
+                  <Card 
+                    key={index} 
+                    className="border-l-4 border-l-primary/20 transition-all duration-200 hover:shadow-lg hover:scale-[1.02] hover:border-l-primary/40"
+                  >
                     <CardContent className="pt-4">
                       {importProfile.error ? (
-                        <Alert variant="destructive">
+                        <Alert variant="destructive" className="animate-fade-in">
                           <AlertCircle className="h-4 w-4" />
                           <AlertDescription>
-                            <strong>{importProfile.pageName}:</strong> {importProfile.error}
+                            <strong className="font-semibold">{importProfile.pageName}:</strong> 
+                            <br />
+                            <span className="text-sm">{importProfile.error}</span>
+                            <br />
+                            <span className="text-xs text-muted-foreground mt-1 block">
+                              Try checking the spelling or using the exact Wikipedia page name (use underscores for spaces)
+                            </span>
                           </AlertDescription>
                         </Alert>
                       ) : importProfile.profile ? (
-                        <div className="space-y-4">
+                        <div className="space-y-4 animate-fade-in">
                           <div className="flex items-start justify-between">
                             <div className="flex-1">
                               <div className="flex items-center gap-2 mb-2">
@@ -329,20 +358,25 @@ export default function ImportProfiles() {
                             </div>
                             
                             {importProfile.profile.imageUrl && (
-                              <img
-                                src={importProfile.profile.imageUrl}
-                                alt={importProfile.profile.title}
-                                className="w-24 h-24 object-cover rounded-lg ml-4 flex-shrink-0"
-                              />
+                              <div className="ml-4 flex-shrink-0 group">
+                                <img
+                                  src={importProfile.profile.imageUrl}
+                                  alt={importProfile.profile.title}
+                                  className="w-24 h-24 object-cover rounded-lg transition-transform duration-200 group-hover:scale-105 shadow-md"
+                                  onError={(e) => {
+                                    e.currentTarget.style.display = 'none';
+                                  }}
+                                />
+                              </div>
                             )}
                           </div>
                           
-                          <div className="flex items-center justify-between pt-2 border-t">
+                          <div className="flex items-center justify-between pt-2 border-t border-border/50">
                             <a
                               href={importProfile.profile.sourceUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-sm text-primary hover:underline flex items-center gap-1"
+                              className="text-sm text-primary hover:text-primary/80 hover:underline flex items-center gap-1 transition-colors duration-200"
                             >
                               View on Wikipedia <ExternalLink className="w-3 h-3" />
                             </a>
@@ -352,7 +386,7 @@ export default function ImportProfiles() {
                                 onClick={() => importToContentful(importProfile)}
                                 disabled={isImporting}
                                 size="sm"
-                                variant="outline"
+                                className="transition-all duration-200 hover:scale-105"
                               >
                                 {isImporting ? (
                                   <>
@@ -379,13 +413,14 @@ export default function ImportProfiles() {
         )}
 
         {profiles.length === 0 && (
-          <Card className="border-dashed">
+          <Card className="border-dashed border-2 animate-fade-in">
             <CardContent className="pt-6">
-              <div className="text-center text-muted-foreground">
-                <Download className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                <p className="text-lg font-medium mb-2">No profiles fetched yet</p>
-                <p className="text-sm">
-                  Enter Wikipedia page names above and click "Fetch from Wikipedia" to get started
+              <div className="text-center text-muted-foreground py-8">
+                <Download className="h-16 w-16 mx-auto mb-4 opacity-40" />
+                <p className="text-xl font-medium mb-2">Ready to Import Filipino Personalities</p>
+                <p className="text-sm max-w-md mx-auto leading-relaxed">
+                  Enter Wikipedia page names above and click "Fetch from Wikipedia" to get started.
+                  Use exact page names with underscores instead of spaces (e.g., "Jose_Rizal").
                 </p>
               </div>
             </CardContent>

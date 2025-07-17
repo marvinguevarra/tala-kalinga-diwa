@@ -8,6 +8,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
 import { AuthGuard } from "@/components/auth-guard";
 import { fetchMultipleWikipediaProfiles, WikipediaProfile } from "@/utils/wikipedia-fetcher";
+import { createPersonFromWikipedia, createMultiplePeopleFromWikipedia } from "@/integrations/contentful/management";
 
 interface ImportProfile {
   pageName: string;
@@ -18,13 +19,18 @@ interface ImportProfile {
 
 const defaultPageNames = `Lea_Salonga
 Manny_Pacquiao
-Hidilyn_Diaz`;
+Hidilyn_Diaz
+Jose_Rizal
+Corazon_Aquino
+Fe_del_Mundo
+Nick_Joaquin`;
 
 export default function ImportProfiles() {
   const [pageNames, setPageNames] = useState(defaultPageNames);
   const [profiles, setProfiles] = useState<ImportProfile[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isImporting, setIsImporting] = useState(false);
+  const [fetchingProgress, setFetchingProgress] = useState({ current: 0, total: 0 });
   const { toast } = useToast();
 
   const fetchFromWikipedia = async () => {
@@ -44,9 +50,25 @@ export default function ImportProfiles() {
 
     setIsLoading(true);
     setProfiles([]);
+    setFetchingProgress({ current: 0, total: names.length });
 
     try {
-      const wikipediaProfiles = await fetchMultipleWikipediaProfiles(names);
+      // Fetch profiles one by one to show progress
+      const wikipediaProfiles: WikipediaProfile[] = [];
+      const errors: string[] = [];
+
+      for (let i = 0; i < names.length; i++) {
+        setFetchingProgress({ current: i + 1, total: names.length });
+        
+        try {
+          const { fetchWikipediaProfile } = await import("@/utils/wikipedia-fetcher");
+          const profile = await fetchWikipediaProfile(names[i]);
+          wikipediaProfiles.push(profile);
+        } catch (error) {
+          errors.push(names[i]);
+          console.error(`Failed to fetch ${names[i]}:`, error);
+        }
+      }
       const results: ImportProfile[] = [];
 
       // Create results array with successful fetches
@@ -57,16 +79,12 @@ export default function ImportProfiles() {
         });
       });
 
-      // Add errors for any missing profiles
-      const fetchedTitles = wikipediaProfiles.map(p => p.title.toLowerCase());
-      names.forEach(name => {
-        const normalizedName = name.replace(/_/g, ' ').toLowerCase();
-        if (!fetchedTitles.some(title => title.includes(normalizedName))) {
-          results.push({
-            pageName: name,
-            error: `Failed to fetch Wikipedia page for "${name}"`
-          });
-        }
+      // Add errors for failed fetches
+      errors.forEach(name => {
+        results.push({
+          pageName: name,
+          error: `Failed to fetch Wikipedia page for "${name}"`
+        });
       });
 
       setProfiles(results);
@@ -86,6 +104,7 @@ export default function ImportProfiles() {
       });
     } finally {
       setIsLoading(false);
+      setFetchingProgress({ current: 0, total: 0 });
     }
   };
 
@@ -94,21 +113,7 @@ export default function ImportProfiles() {
 
     setIsImporting(true);
     try {
-      // TODO: Implement actual Contentful Management API integration
-      // This is a placeholder that simulates the import process
-      const { profile } = importProfile;
-      
-      console.log('Importing profile to Contentful:', {
-        title: profile.title,
-        slug: profile.slug,
-        biography: profile.biography.substring(0, 100) + '...',
-        imageUrl: profile.imageUrl,
-        categories: profile.categories,
-        sourceUrl: profile.sourceUrl
-      });
-
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await createPersonFromWikipedia(importProfile.profile);
       
       // Update the profile as imported
       setProfiles(prev => prev.map(p => 
@@ -119,7 +124,7 @@ export default function ImportProfiles() {
 
       toast({
         title: "Import Successful",
-        description: `${profile.title} has been imported to Contentful`,
+        description: `${importProfile.profile.title} has been imported to Contentful`,
       });
     } catch (error) {
       toast({
@@ -144,33 +149,39 @@ export default function ImportProfiles() {
     }
 
     setIsImporting(true);
-    let successCount = 0;
+    
+    try {
+      const wikipediaProfiles = validProfiles
+        .map(p => p.profile!)
+        .filter(Boolean);
+      
+      const results = await createMultiplePeopleFromWikipedia(wikipediaProfiles);
+      
+      // Update the profiles as imported based on successful results
+      setProfiles(prev => prev.map(p => {
+        if (p.profile && results.successful.includes(p.profile.title)) {
+          return { ...p, imported: true };
+        }
+        return p;
+      }));
 
-    for (const importProfile of validProfiles) {
-      try {
-        // TODO: Implement actual Contentful Management API integration
-        console.log('Bulk importing:', importProfile.profile?.title);
-        
-        // Simulate import delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        setProfiles(prev => prev.map(p => 
-          p.pageName === importProfile.pageName 
-            ? { ...p, imported: true }
-            : p
-        ));
-        
-        successCount++;
-      } catch (error) {
-        console.error(`Failed to import ${importProfile.pageName}:`, error);
+      toast({
+        title: "Bulk Import Complete",
+        description: `Successfully imported ${results.successful.length} out of ${validProfiles.length} profiles. ${results.failed.length} failed.`,
+      });
+
+      if (results.failed.length > 0) {
+        console.error('Failed imports:', results.failed);
       }
+    } catch (error) {
+      toast({
+        title: "Bulk Import Failed",
+        description: error instanceof Error ? error.message : "Unknown error",
+        variant: "destructive",
+      });
+    } finally {
+      setIsImporting(false);
     }
-
-    setIsImporting(false);
-    toast({
-      title: "Bulk Import Complete",
-      description: `Successfully imported ${successCount} out of ${validProfiles.length} profiles`,
-    });
   };
 
   return (
@@ -180,7 +191,7 @@ export default function ImportProfiles() {
           <div>
             <h1 className="text-3xl font-bold tracking-tight">Import Profiles from Wikipedia</h1>
             <p className="text-muted-foreground">
-              Fetch profile data from Wikipedia and import to Contentful
+              Enter Wikipedia page names (one per line) for Filipino personalities you want to import
             </p>
           </div>
         </div>
@@ -205,7 +216,7 @@ export default function ImportProfiles() {
                 className="font-mono text-sm"
               />
               <p className="text-xs text-muted-foreground mt-2">
-                Pre-filled with examples: Lea Salonga, Manny Pacquiao, and Hidilyn Diaz
+                Pre-filled with examples of notable Filipino personalities. Use underscores for spaces in page names.
               </p>
             </div>
             
@@ -217,7 +228,10 @@ export default function ImportProfiles() {
               {isLoading ? (
                 <>
                   <Loader className="mr-2 h-4 w-4 animate-spin" />
-                  Fetching from Wikipedia...
+                  {fetchingProgress.total > 0 
+                    ? `Fetching ${fetchingProgress.current} of ${fetchingProgress.total}...`
+                    : "Fetching from Wikipedia..."
+                  }
                 </>
               ) : (
                 <>

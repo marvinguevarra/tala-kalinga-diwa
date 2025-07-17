@@ -57,7 +57,7 @@ class WikipediaFetcher {
   private readonly rateLimitMs = 1000; // 1 second between requests
   private readonly baseUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/';
   private readonly apiUrl = 'https://en.wikipedia.org/w/api.php';
-  private readonly userAgent = '100Filipinos/1.0 (contact@example.com)';
+  private readonly userAgent = '100InfluentialFilipinos/1.0 (project@example.com)';
 
   private constructor() {}
 

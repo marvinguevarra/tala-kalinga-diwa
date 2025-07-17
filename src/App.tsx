@@ -13,6 +13,7 @@ import ContentfulTest from "./pages/ContentfulTest";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
 import Admin from "./pages/Admin";
+import AdminImportProfiles from "./pages/AdminImportProfiles";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/admin" element={<Admin />} />
+                <Route path="/admin/import-profiles" element={<AdminImportProfiles />} />
                 <Route path="/profile-demo" element={<ProfileDemo />} />
                 <Route path="/contentful-test" element={<ContentfulTest />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

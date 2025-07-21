@@ -15,6 +15,10 @@ import Auth from "./pages/Auth";
 import Admin from "./pages/Admin";
 import AdminImportProfiles from "./pages/AdminImportProfiles";
 import ImportProfiles from "./pages/admin/ImportProfiles";
+import Profiles from "./pages/Profiles";
+import Categories from "./pages/Categories";
+import Timeline from "./pages/Timeline";
+import About from "./pages/About";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +41,10 @@ const App = () => (
                 <Route path="/admin/import" element={<ImportProfiles />} />
                 <Route path="/profile-demo" element={<ProfileDemo />} />
                 <Route path="/contentful-test" element={<ContentfulTest />} />
+                <Route path="/profiles" element={<Profiles />} />
+                <Route path="/categories" element={<Categories />} />
+                <Route path="/timeline" element={<Timeline />} />
+                <Route path="/about" element={<About />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

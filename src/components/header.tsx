@@ -13,12 +13,12 @@ export function Header() {
 
   const navigation = [
     { name: "Home", href: "/" },
-    { name: "All Profiles", href: "#" },
-    { name: "Categories", href: "#" },
+    { name: "All Profiles", href: "/profiles" },
+    { name: "Categories", href: "/categories" },
     { name: "Profile Demo", href: "/profile-demo" },
     { name: "Contentful Test", href: "/contentful-test" },
-    { name: "Timeline", href: "#" },
-    { name: "About", href: "#" }
+    { name: "Timeline", href: "/timeline" },
+    { name: "About", href: "/about" }
   ];
 
   return (

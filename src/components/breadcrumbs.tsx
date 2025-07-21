@@ -15,8 +15,14 @@ const routeLabels: Record<string, string> = {
   "/": "Home",
   "/auth": "Authentication",
   "/admin": "Admin Dashboard",
+  "/admin/import-profiles": "Import Profiles",
+  "/admin/import": "Wikipedia Import",
   "/profile-demo": "Profile Demo",
   "/contentful-test": "Contentful Test",
+  "/profiles": "All Profiles",
+  "/categories": "Categories",
+  "/timeline": "Timeline",
+  "/about": "About",
 };
 
 export function BreadcrumbNav() {
